@@ -1,0 +1,453 @@
+{% extends 'layout/default.html' %}
+{% load filters %}
+{% block content %}
+
+    <div class="page-title" text="edit_auction"></div>
+
+    <div class="edit-item-info">
+
+        <div class="flex xl:flex-row flex-col gap-2.5">
+
+            <div class="flex flex-col flex-1">
+
+                <div class="panel px-0 flex-1 py-6 ltr:xl:mr-6 rtl:xl:ml-6 no-select">
+
+                    <div class="flex justify-between flex-wrap px-4">
+
+                        <div class="mb-6 w-full">
+    
+                            <div class="flex items-center text-black dark:text-white shrink-0 image-banner relative for-ar">
+    
+                                {{ files|json_script:"item-images" }}
+
+                                <div class="swiper my-slider">
+                                    <div class="swiper-wrapper" style="background-image: url('/static/media/product/default.png')"></div>
+                                    <div class="swiper-button-next active"></div>
+                                    <div class="swiper-button-prev active"></div>
+                                </div>
+    
+                            </div>
+    
+                            <input type="file" name="change-image" class="hidden" multiple>
+    
+                            <div class="files-banner w-full flex items-center justify-between flex-wrap mt-5 no-select">
+    
+                                <div class="flex items-center justify-start">
+    
+                                    <button type="button" class="btn btn-primary add-img-btn">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-4 ltr:mr-2 rtl:ml-2">
+                                            <path d="M3 15C3 17.8284 3 19.2426 3.87868 20.1213C4.75736 21 6.17157 21 9 21H15C17.8284 21 19.2426 21 20.1213 20.1213C21 19.2426 21 17.8284 21 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M12 16V3M12 3L16 7.375M12 3L8 7.375" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                        <span text="upload_file"></span>
+                                    </button>
+    
+                                    <button type="button" class="btn btn-primary add-url-btn">
+                                        <svg height="20" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512">
+                                            <g>
+                                              <g fill="#fff">
+                                                <path d="m354.2,247.4l-135.1-92.4c-4.2-3.1-15.4-3.1-16.3,8.6v184.8c1,11.7 12.4,11.9 16.3,8.6l135.1-92.4c3.5-2.1 8.3-10.7 0-17.2zm-130.5,81.3v-145.4l106.1,72.7-106.1,72.7z"/>
+                                                <path d="M256,11C120.9,11,11,120.9,11,256s109.9,245,245,245s245-109.9,245-245S391.1,11,256,11z M256,480.1    C132.4,480.1,31.9,379.6,31.9,256S132.4,31.9,256,31.9S480.1,132.4,480.1,256S379.6,480.1,256,480.1z"/>
+                                              </g>
+                                            </g>
+                                        </svg>
+                                        <span text="external_video" class="ltr:ml-2 rtl:mr-2"></span>
+                                    </button>
+    
+                                </div>
+    
+                                <div class="banner-index">
+                                    <span class="current-index">0</span> - <span class="count-sliders">0</span> <span text="files"></span>
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b]">
+
+                    <div class="mt-4 px-4">
+
+                        <div class="flex justify-between lg:flex-row flex-col">
+
+                            <div class="w-full mb-6 div-2">
+
+                                <div class="mt-4 flex items-center">
+                                    <label for="name" class="ltr:mr-2 rtl:ml-2 w-1/5 mb-0" text="auction_name"></label>
+                                    <input id="name" type="text" value="{{product.name|value}}" name="name" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="mt-4 flex items-center">
+                                    <label for="keys" class="ltr:mr-2 rtl:ml-2 w-1/5 mb-0" text="key_words"></label>
+                                    <input id="keys" type="text" name="keys" value="{{product.keys|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="mt-4 flex items-center">
+                                    <label for="location" class="ltr:mr-2 rtl:ml-2 w-1/5 mb-0" text="location"></label>
+                                    <input id="location" type="text" name="location" value="{{product.location|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b]">
+
+                    <div class="mt-4 px-4">
+
+                        <div class="flex justify-between lg:flex-row flex-col">
+
+                            <div class="w-full div-2">
+
+                                <div class="mt-4 flex items-center">
+                                    <label for="brochure" class="ltr:mr-2 rtl:ml-2 w-1/5 mb-0" text="brochure"></label>
+                                    <input id="brochure" type="text" name="brochure" value="{{product.brochure_url|value}}" class="form-input flex-1" autocomplete="off">
+
+                                </div>
+
+                                <div class="mt-4 flex items-center">
+                                    <label for="study" class="ltr:mr-2 rtl:ml-2 w-1/5 mb-0" text="study"></label>
+                                    <input id="study" type="text" name="study" value="{{product.study_url|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-6 px-4">
+
+                        <div class="flex justify-between lg:flex-row flex-col">
+
+                            <div class="lg:w-1/2 w-full ltr:lg:mr-6 rtl:lg:ml-6 mb-4 div-2">
+
+                                <div class="flex items-center mt-4">
+                                    <label for="expire_date" class="ltr:mr-2 rtl:ml-2 w-1/4 mb-0" text="expire_date"></label>
+                                    <input id="expire_date" type="datetime-local" name="expire_date" value="{{product.expire_date|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="flex items-center mt-4">
+                                    <label for="old_price" class="ltr:mr-2 rtl:ml-2 w-1/4 mb-0" text="old_price"></label>
+                                    <input id="old_price" type="number" min="0" value="{{product.old_price}}" name="old_price" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="flex items-center mt-4">
+                                    <label for="company" class="ltr:mr-2 rtl:ml-2 w-1/4 mb-0" text="company"></label>
+                                    <input id="company" type="text" name="company" value="{{product.company|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                            </div>
+
+                            <div class="lg:w-1/2 w-full div-3">
+
+                                <div class="flex items-center mt-4">
+                                    <label for="number" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0 ltr:pl-8 rtl:pr-8" text="code"></label>
+                                    <input id="number" type="text" name="number" value="{{product.number|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="flex items-center mt-4">
+                                    <label for="new_price" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0 ltr:pl-8 rtl:pr-8" text="new_price"></label>
+                                    <input id="new_price" type="number" min="0" value="{{product.new_price}}" name="new_price" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                                <div class="flex items-center mt-4">
+                                    <label for="phone" class="ltr:mr-2 rtl:ml-2 w-1/3 mb-0 ltr:pl-8 rtl:pr-8" text="phone"></label>
+                                    <input id="phone" type="text" name="phone" value="{{product.phone|value}}" class="form-input flex-1" autocomplete="off">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] mt-6">
+
+                    <div class="mt-6 px-4 textarea-box">
+                        
+                        <label class="mb-4" text="details"></label>
+
+                        <div class="included">
+
+                            <ul class="sortable">
+
+                                {% for ch in product.included|parse %}
+                                
+                                    <li class="w-full flex justify-between items-center mb-4">
+                                        <input type="text" name="key" value="{{ ch.key|value }}" class="form-input w-1/3" text="name" autocomplete="off">
+                                        <input type="text" name="value" value="{{ ch.value|value }}" class="form-input" style="width: 63%" text="value" autocomplete="off">
+                                    </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                            <div class="full-width flex justify-end mt-6">
+
+                                <button type="button" class="btn btn-primary" onclick="add_input()" text="add_item"></button>
+
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] mt-6">
+
+                    <div class="mt-6 px-4 textarea-box">
+                        
+                        <label class="mb-4" text="overview"></label>
+                        
+                        <div class="editor editor-overview" height="9rem">{{product.overview|value|safe}}</div>
+
+                    </div>
+
+                    <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] mt-6">
+
+                    <div class="mt-6 mb-4 px-4 textarea-box">
+                        
+                        <label class="mb-4" text="notes"></label>
+                        
+                        <textarea id="notes" name="notes" class="form-textarea min-h-[80px] no-resize" rows="5">{{product.notes|value}}</textarea>
+        
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="xl:w-96 w-full xl:mt-0 mt-6 left-tab no-select">
+
+                <div>
+
+                    <div class="panel mb-5 pb-2">
+
+                        <div class="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-1">
+
+                            <div>
+
+                                <label for="views" class="mb-3" text="views"></label>
+
+                                <input id="views" type="number" name="views" value="{{product.views}}" min="0" class="form-input default" readonly>
+
+                            </div>
+
+                            <div>
+
+                                <label for="reviews" class="mb-3" text="reviews"></label>
+
+                                <input id="reviews" type="number" name="reviews" value="{{product.reviews}}" min="0" class="form-input default" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <div class="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-6">
+
+                            <div>
+
+                                <label for="bookings" class="mb-3" text="orders"></label>
+
+                                <input id="bookings" type="number" name="bookings" value="{{product.bookings}}" min="0" class="form-input default" readonly>
+
+                            </div>
+
+                            <div>
+
+                                <label for="date" class="mb-3" text="date"></label>
+
+                                <input id="date" type="text" name="date" value="{{product.date|date}}" class="form-input default" readonly>
+
+                            </div>
+
+                        </div>
+
+                        <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] mt-6 mb-5">
+
+                        <div class="check-input">
+
+                            <label class="w-12 h-6 relative">
+                                
+                                {% if product.allow_bookings %}
+                                    <input checked id="allow_bookings" name="allow_bookings" type="checkbox" class="absolute w-full h-full opacity-0 z-10 pointer peer">
+                                {% else %}
+                                    <input id="allow_bookings" name="allow_bookings" type="checkbox" class="absolute w-full h-full opacity-0 z-10 pointer peer">
+                                {% endif %}
+
+                                <span class="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 
+                                    before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 
+                                    before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary 
+                                    before:transition-all before:duration-300">
+                                </span>
+
+                            </label>
+
+                            <label for="allow_bookings" class="ltr:pl-3 rtl:pr-3 pointer" text="allow_bookings"></label>
+
+                        </div>
+
+                        <hr class="border-[#e0e6ed] dark:border-[#1b2e4b] mt-4 mb-5">
+
+                        <div class="check-input">
+
+                            <label class="w-12 h-6 relative">
+                                
+                                {% if product.active %}
+                                    <input checked id="active" name="active" type="checkbox" class="absolute w-full h-full opacity-0 z-10 pointer peer">
+                                {% else %}
+                                    <input id="active" name="active" type="checkbox" class="absolute w-full h-full opacity-0 z-10 pointer peer">
+                                {% endif %}
+
+                                <span class="bg-[#ebedf2] dark:bg-dark block h-full rounded-full before:absolute before:left-1 
+                                    before:bg-white dark:before:bg-white-dark dark:peer-checked:before:bg-white before:bottom-1 
+                                    before:w-4 before:h-4 before:rounded-full peer-checked:before:left-7 peer-checked:bg-primary 
+                                    before:transition-all before:duration-300">
+                                </span>
+
+                            </label>
+
+                            <label for="active" class="ltr:pl-3 rtl:pr-3 pointer" text="active"></label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel">
+
+                        <div class="grid xl:grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
+
+                            <button type="button" onclick="save_data()" class="pointer btn btn-success w-full gap-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
+                                    <path d="M3.46447 20.5355C4.92893 22 7.28595 22 12 22C16.714 22 19.0711 22 20.5355 20.5355C22 19.0711 22 16.714 22 12C22 11.6585 22 11.4878 21.9848 11.3142C21.9142 10.5049 21.586 9.71257 21.0637 9.09034C20.9516 8.95687 20.828 8.83317 20.5806 8.58578L15.4142 3.41944C15.1668 3.17206 15.0431 3.04835 14.9097 2.93631C14.2874 2.414 13.4951 2.08581 12.6858 2.01515C12.5122 2 12.3415 2 12 2C7.28595 2 4.92893 2 3.46447 3.46447C2 4.92893 2 7.28595 2 12C2 16.714 2 19.0711 3.46447 20.5355Z" stroke="currentColor" stroke-width="1.5" />
+                                    <path d="M17 22V21C17 19.1144 17 18.1716 16.4142 17.5858C15.8284 17 14.8856 17 13 17H11C9.11438 17 8.17157 17 7.58579 17.5858C7 18.1716 7 19.1144 7 21V22" stroke="currentColor" stroke-width="1.5" />
+                                    <path opacity="0.5" d="M7 8H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                                <span text="save"></span>&nbsp;
+                            </button>
+                            <button type="button" class="pointer close-item btn btn-warning w-full gap-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
+                                    <path d="M12 7V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+                                    <path opacity="0.5" d="M7.84308 3.80211C9.8718 2.6007 10.8862 2 12 2C13.1138 2 14.1282 2.6007 16.1569 3.80211L16.8431 4.20846C18.8718 5.40987 19.8862 6.01057 20.4431 7C21 7.98943 21 9.19084 21 11.5937V12.4063C21 14.8092 21 16.0106 20.4431 17C19.8862 17.9894 18.8718 18.5901 16.8431 19.7915L16.1569 20.1979C14.1282 21.3993 13.1138 22 12 22C10.8862 22 9.8718 21.3993 7.84308 20.1979L7.15692 19.7915C5.1282 18.5901 4.11384 17.9894 3.55692 17C3 16.0106 3 14.8092 3 12.4063V11.5937C3 9.19084 3 7.98943 3.55692 7C4.11384 6.01057 5.1282 5.40987 7.15692 4.20846L7.84308 3.80211Z" stroke="currentColor" stroke-width="1.5"></path>
+                                </svg>
+                                <span text="cancel"></span>
+                            </button>
+                            <button type="button" class="pointer delete-item btn btn-danger w-full gap-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
+                                    <path opacity="0.5" d="M9.17065 4C9.58249 2.83481 10.6937 2 11.9999 2C13.3062 2 14.4174 2.83481 14.8292 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <path d="M20.5001 6H3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <path d="M18.8334 8.5L18.3735 15.3991C18.1965 18.054 18.108 19.3815 17.243 20.1907C16.378 21 15.0476 21 12.3868 21H11.6134C8.9526 21 7.6222 21 6.75719 20.1907C5.89218 19.3815 5.80368 18.054 5.62669 15.3991L5.16675 8.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <path opacity="0.5" d="M9.5 11L10 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                    <path opacity="0.5" d="M14.5 11L14 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+                                </svg>
+                                <span text="delete"></span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% block fixed %}
+
+            <div class="fixed inset-0 bg-[black]/60 z-[60] overflow-y-auto no-select hide get-details items-center justify-center">
+                <div class="flex items-center justify-center min-h-screen px-4 get-details-div" style="width: 40rem">
+                    <div class="panel border-0 p-0 rounded-lg overflow-hidden md:w-full max-w-lg w-[90%] my-8">
+                        <div type="button" class="pointer absolute top-4 ltr:right-4 rtl:left-4 text-white-dark hover:text-dark not-outline close" 
+                            onclick="$(this).parents('.get-details').fadeOut(100)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-6 rtl:pr-6 py-3 ltr:pr-[50px] rtl:pl-[50px] text-white-dark title"
+                            style="font-size: 1rem; letter-spacing: 0; white-space: nowrap; overflow: hidden;"></h3>
+                        <div class="p-5 py-6">
+                            <form onsubmit="event.preventDefault(); $('.get-details').fadeOut(100);">
+                                <input type="text" class="form-input" required/>
+                                <button type="submit" class="btn btn-primary mt-6 get-details-btn"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endblock %}
+
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+
+        manage_item("auctions", true);
+
+        const save_data = _ => {
+
+            let included = [];
+
+            $(".edit-item-info .included ul li").each(function(){
+                let key = trim($(this).find("input[name='key']").val());
+                let value = trim($(this).find("input[name='value']").val());
+                if ( value ) included.push({key: key, value: value});
+            });
+
+            let data = {
+                "name": trim($(".edit-item-info input[name='name']").val()),
+                "keys": trim($(".edit-item-info input[name='keys']").val()),
+                "location": trim($(".edit-item-info input[name='location']").val()),
+                "company": trim($(".edit-item-info input[name='company']").val()),
+                "phone": trim($(".edit-item-info input[name='phone']").val()),
+                "number": trim($(".edit-item-info input[name='number']").val()),
+                "brochure_url": trim($(".edit-item-info input[name='brochure']").val()),
+                "study_url": trim($(".edit-item-info input[name='study']").val()),
+                "expire_date": $(".edit-item-info input[name='expire_date']").val().replace("T", " "),
+                "new_price": parseFloat($(".edit-item-info input[name='new_price']").val()) || 0,
+                "old_price": parseFloat($(".edit-item-info input[name='old_price']").val()) || 0,
+                "views": parseInt($(".edit-item-info input[name='views']").val()) || 0,
+                "reviews": parseInt($(".edit-item-info input[name='reviews']").val()) || 0,
+                "bookings": parseInt($(".edit-item-info input[name='bookings']").val()) || 0,
+                "allow_bookings": $(".edit-item-info input[name='allow_bookings']").prop("checked"),
+                "active": $(".edit-item-info input[name='active']").prop("checked"),
+                "overview": trim($('.editor-overview > div').html()),
+                "notes": trim($(".edit-item-info textarea[name='notes']").val()),
+                "included": JSON.stringify(included),
+            }
+
+            if ( ! trim($(".edit-item-info input[name='name']").val()) ) return show_msg(text("error_name"), "error");
+
+            send_data("/edit-auction/{{product.id}}", data);
+
+        }
+
+        const add_input = _ => {
+                                
+            $(".included ul").append(`
+                <li class="w-full flex justify-between items-center mb-4">
+                    <input type="text" name="key" class="form-input w-1/3" placeholder="${text('name')}" autocomplete="off">
+                    <input type="text" name="value" class="form-input" style="width: 63%" placeholder="${text('value')}" autocomplete="off">
+                </li>
+            `);
+
+            if ( _ ) $(".included li").last().find("input[name='key']").focus();
+
+        }
+
+        if ( !$(".included ul li").length ) add_input();
+        
+    </script>
+
+{% endblock %}

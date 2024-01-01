@@ -1,0 +1,1 @@
+let _german_data_ = {}

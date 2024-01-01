@@ -1,0 +1,1 @@
+let _japanese_data_ = {}
